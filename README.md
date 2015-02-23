@@ -4,11 +4,11 @@
 Spring Rest API + myBatis + AngularJS + Bootstrap Theme + Google Map API
 
 ## 개발(실행)환경
-JAVA 8
-Tomcat 8.X
-MariaDB 10.X
-개발환경 설정은 작성해 놓은 slideshare를 참고하세요.
-[링크](http://www.slideshare.net/jiseobkim3/spring-44190451 "spring 개발 환경 설정").
+JAVA 8  
+Tomcat 8.X  
+MariaDB 10.X  
+개발환경 설정은 작성해 놓은 [slideshare](http://www.slideshare.net/jiseobkim3/spring-44190451 "spring 개발 환경 설정")를 참고하세요.  
+
 
 ## How To Use
 1. 데이터베이스에 따라 context-datasource.xml 파일 수정해주세요.
