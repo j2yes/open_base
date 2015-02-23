@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deabak.base.mapper.MapMapper">
+	
+	<!-- resutl map 등록 -->
+	<resultMap id="map" type="deabak.base.domain.Map">
+	  <result property="id"     	 column="id" />
+	  <result property="latitude"    column="latitude"/>
+	  <result property="longitude"   column="longitude"/>
+	  <result property="title"   	 column="title"/>
+	  <result property="address"     column="address"/>
+	  <result property="comment"     column="comment"/>
+	  <result property="displayFlag" column="display_flag"/>
+	  <result property="regId"   	 column="reg_id"/>
+	  <result property="regDate"   	 column="reg_date"/>
+	  <result property="modId"   	 column="mod_id"/>
+	  <result property="modDate"   	 column="mod_date"/>
+	  <result property="totalCount"	 column="tot_count"/>
+	</resultMap>
+	
+	
+	<!-- 등록 -->
+	<insert id="createMap" parameterType="deabak.base.domain.Map" useGeneratedKeys="true" keyProperty="id" >
+		<![CDATA[
+			insert into map (
+				   latitude
+				 , longitude
+				 , title
+				 , address
+				 , comment
+				 , display_flag
+				 , reg_id
+				 , reg_date
+				 , mod_id
+				 , mod_date )
+			values (
+				   #{latitude}
+				 , #{longitude}
+				 , #{title}
+				 , #{address}
+				 , #{comment}
+				 , 'N'
+				 , #{regId}
+				 , now()
+				 , null
+				 , null
+			)
+		]]>
+	</insert>
+
+	<!-- 목록정보 -->
+	<select id="getMapList" parameterType="deabak.base.domain.Map" resultMap="map">
+		<![CDATA[
+			 select id
+				  , latitude
+				  , longitude
+				  , title
+				  , address
+				  , comment
+				  , display_flag
+				  , reg_id
+				  , reg_date
+				  , mod_id
+				  , mod_date
+				  , (select count(*) from map) as tot_count
+			   from map
+			  inner join (
+			 		 select id
+					   from map
+					  where 1=1
+		]]>	
+						<if test="title != '' and title != null">
+					    and title like concat('%',#{title},'%')
+						</if>
+						<if test="displayFlag != '' and displayFlag != null">
+						and display_flag = #{displayFlag}
+						</if>
+		<![CDATA[
+					   order by id desc
+					   limit #{startIndex}, #{limit}
+					) as sub1
+			  using(id)
+			  order by id desc
+		]]>
+	</select>
+	
+	<!-- 상세정보 -->
+	<select id="getMap" parameterType="java.lang.String" resultMap="map">
+		<![CDATA[
+			 select id
+				  , latitude
+				  , longitude
+				  , title
+				  , address
+				  , comment
+				  , display_flag
+				  , reg_id
+				  , reg_date
+				  , mod_id
+				  , mod_date
+			  from map
+			 where 1=1
+			   and id = #{id}
+		]]>
+	</select>
+	
+	<!-- 지도에 mark & unmark -->
+	<update id="markAndUnmark" parameterType="deabak.base.domain.Map" useGeneratedKeys="true" keyProperty="id" >
+		<![CDATA[
+			update map
+			   set display_flag = #{displayFlag}
+				 , mod_id  = #{modId}
+				 , mod_date = now()
+			 where id = #{id}
+		]]>
+	</update>
+	
+	<!-- 수정 -->
+	<update id="updateMap" parameterType="deabak.base.domain.Map" useGeneratedKeys="true" keyProperty="id" >
+		<![CDATA[
+			update map 
+			   set title = #{title}
+				 , comment =  #{comment}
+				 , display_flag =  #{displayFlag}
+				 , mod_id = #{modId}
+				 , mod_date = now()
+			 where id = #{id}
+		]]>
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteMap" parameterType="java.lang.String">
+		   delete
+		     from map
+	        where id = #{id}
+	</delete>
+	
+</mapper>

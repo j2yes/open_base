@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    
+
+	<!-- sqlSessionFactoryBean setup for myBATIS Database Layer -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="baseDataSource" />
+        <!-- <property name="typeAliasesPackage" value="com.test.mybatis" /> -->
+        <property name="mapperLocations" value="classpath:deabak/base/mybatis/*.xml" />
+    </bean>
+	
+	<!-- component-scan for repository -->
+	<!-- mapper annotation -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+  		<property name="basePackage" value="deabak.base.mapper" />
+  		<!-- sqlsessionfactory 대신 sqlsessiontemplate을 주입해도 상관없음 -->
+  		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+  		<!-- mapper를 위한 annotaion 지정 -->
+  		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+  		<!-- mapper로 만들 상위 인터페이스 지정 -->
+  		<!-- <property name="markerInterface" value=""/> -->
+	</bean>
+	
+	<!-- service단에서 mapper를 get해서 (getMapper method이용)사용할 때 이용함 - Batch 가능
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+	 -->
+	 
+	<!-- sqlMapperFactoryBean -->
+	<!-- mapper를 하나씩 등록하여 사용 가능함
+	<bean id="superMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	
+	</bean>
+	 -->
+	 
+</beans>	

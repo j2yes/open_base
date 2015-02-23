@@ -1,0 +1,63 @@
+<div class="span8">
+	<div class="title"><h3>Spot List</h3></div>
+	<!-- start: Row -->
+	<div class="row">
+		<div class="span2" ng-repeat="map in mapList">
+			<div class="icons-box" ng-click="markAndUnmark(map)">
+				<i class="ico-ok ico-white circle-color-full big-color" ng-if="map.displayFlag=='Y'"></i>
+				<i class="ico-ok circle big" ng-if="map.displayFlag=='N'"></i>
+				<div class="title"><h6 style='width:60%; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;'>{{map.title}}</h6></div>
+				<p style='width:100%; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;'>
+				{{map.comment}}<br/>
+				</p>
+				<div class="clear"></div>
+			</div>
+			<a href="#/maps/{{map.id}}">for more details</a>
+		</div>
+	
+		<div class="span8">
+			<div class="icons-box" ng-click="selectMoreMapList()"> 
+				<h1>more spot</h1>
+			</div>
+		</div>
+	</div>
+	<!-- end: Row -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<button style="margin-right: 10px;" type="button" class="btn btn-default navbar-btn" ng-click="newBookmark()">
+ <span class="glyphicon glyphicon-plus"></span> �떊洹쒖텛媛�
+</button>
+<div class="list-group" ng-if="true">
+ <a ng-repeat="map in mapList" ng-href="#/maps/{{map.id}}" class="list-group-item">
+  <span class="badge pull-right">{{map.title}}</span> 
+  <span>{{map.comment}}</span>
+ </a>
+</div>
+<div class="grid" ng-if="bookmarkListViewType=='grid'">
+ <div class="panel panel-default" ng-repeat="bookmark in bookmarkList">
+  <div class="panel-heading">
+   <a ng-href="#/bookmarks/{{bookmark.bookmarkId}}">{{bookmark.bookmarkName}} ({{bookmark.bookmarkId}})</a>
+  </div>
+  <div class="panel-body">
+   <img ng-src="http://free.pagepeeker.com/v2/thumbs.php?size=l&url={{bookmark.bookmarkUrl}}">
+   <p>{{bookmark.bookmarkUrl}}</p>
+  </div>
+ </div>
+</div>   
+ -->

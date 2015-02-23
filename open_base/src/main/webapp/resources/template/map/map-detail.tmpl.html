@@ -1,0 +1,44 @@
+<div class="span4">
+	<div class="title"><h3>Spot Information</h3></div>
+	<form name="updateMapForm">
+		<div class="form-group">
+			<div class="clearfix">
+				<label for="address"><span>Address:</span></label>
+				<div class="input">
+					<input tabindex="1" size="18" id="address" name="address" type="text" class="input-xlarge" ng-required="true" ng-model='map.address' ng-disabled="true"/>
+				</div>
+			</div>
+			
+			<div class="clearfix">
+				<label for="coordinate"><span>Coordinate:</span></label>
+				<div class="input">
+					<input tabindex="2" size="6" id="latitude" name="coordinate" type="text" class="input-xlarge" ng-required="true" ng-model='map.latitude' ng-disabled="true"/><br/>
+					<input tabindex="3" size="6" id="longitude" name="coordinate" type="text" class="input-xlarge" ng-required="true" ng-model='map.longitude' ng-disabled="true"/>
+				</div>
+			</div>
+			
+			<div class="clearfix">
+				<label for="title"><span>Title:</span></label>
+				<div class="input">
+					<input tabindex="4" size="25" id="title" name="title" type="text" class="input-xlarge" ng-required="true" ng-model='map.title' ng-maxlength="20"/>
+				</div>
+			</div>
+		
+			<div class="clearfix">
+				<label for="comment"><span>Comment:</span></label>
+				<div class="input">
+					<textarea tabindex="5" class="input-xlarge" id="comment" name="comment" rows="6"  ng-model='map.comment' ng-maxlength="500"></textarea>
+				</div>
+			</div>
+			
+			<input type="button" class="btn btn-default" value="back" ng-click="mapList()" />
+			<input type="button" class="btn btn-info" value="update" ng-click="modifyMap(map)" />
+			<input type="button" class="btn btn-danger" value="delete" ng-click="deleteMap(map)" />
+		</div>
+	 </form>
+ </div>
+ 
+ <div class="span4">
+ 	<div class="title"><h3>Street View</h3></div>
+	<div id="pano" style="height: 450px"></div>
+ </div>

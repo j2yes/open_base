@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+	
+	<property name="LOG_HOME" value="C:/WORK/logs" />
+	
+	<property name="contextName" value="base" />
+	
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <encoder>
+            <pattern>%-5level %logger{0} - %msg%n</pattern>
+        </encoder> -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm} %-5level %logger{36} - %msg%n</Pattern>
+		</layout>
+    </appender>
+
+	<!-- ch.qos.logback.core.rolling.RollingFileAppender -->
+	<appender name="sqlAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/${contextName}.sql.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${contextName}.sql.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+    
+    <!-- ch.qos.logback.core.FileAppender -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+	<file>${LOG_HOME}/${contextName}.log</file>
+    <encoder>
+    <pattern>%date %-5level [%thread] - [%logger] - %msg%n</pattern>
+    </encoder>
+	</appender>
+ 
+ 	<logger name="java.sql" 		level="error" >
+ 		<appender-ref ref="sqlAppender"/>
+ 	</logger>
+ 	<logger name="jdbc.sqlonly" 	level="debug" > 	
+ 		<appender-ref ref="sqlAppender"/>
+ 	</logger>
+ 	<logger name="jdbc.sqltiming" 	level="debug" > 	
+ 		<appender-ref ref="sqlAppender"/>
+ 	</logger>
+ 	<logger name="jdbc.audit" 		level="error" > 
+ 		<appender-ref ref="sqlAppender"/>
+ 	</logger>
+ 	<!-- <logger name="jdbc.resultset" 	level="error" > 	
+ 		<appender-ref ref="sqlAppender"/>
+ 	</logger>	 -->
+ 	
+ 	<logger name="org.springframework.jdbc" >
+ 		<level value="debug"/>
+ 		<appender-ref ref="sqlAppender"/>
+ 	</logger>
+
+    <root level="debug">
+        <appender-ref ref="console" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
