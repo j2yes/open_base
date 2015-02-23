@@ -1,14 +1,16 @@
-CREATE TABLE IF NOT EXISTS MAP (
-	id integer NOT NULL AUTO_INCREMENT,
-	latitude float,
-	longitude float,
-	title varchar(200),
-	address varchar(500),
-	comment varchar(2000),
-	display_flag char(1) not null default 'N',
-	reg_id varchar(100),
-	reg_date datetime,
-	mod_id varchar(100),
-	mod_date datetime,
-	CONSTRAINT map_id PRIMARY KEY(id)
-);
+CREATE TABLE map (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`latitude` VARCHAR(50) NULL DEFAULT NULL,
+	`longitude` VARCHAR(50) NULL DEFAULT NULL,
+	`title` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`address` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`comment` VARCHAR(2000) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`display_flag` CHAR(1) NOT NULL DEFAULT 'N' COLLATE 'utf8_general_ci',
+	`reg_id` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` DATETIME NULL DEFAULT NULL,
+	`mod_id` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`mod_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
