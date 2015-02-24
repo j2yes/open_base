@@ -18,3 +18,4 @@ MariaDB 10.X
   * 일반화면 전환은 controller package하위의 web package 에 Controller파일을 만들어 이용하세요.
 3. 나머지 개발은 일반적인 MVC패턴에 맞춰 개발하시면 됩니다.
 
+**실제 실행되는 서비스는 [여기](http://52.10.225.208:8080/open_base/ "example url")서 확인해 주세요.**
