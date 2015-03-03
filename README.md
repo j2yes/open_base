@@ -1,8 +1,9 @@
 # 스프링으로 RESTFul 서비스 만들기
 
 ## 사용 기술 Stack
-Spring Rest API + myBatis + AngularJS + Bootstrap Theme + Google Map API
 [![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/j2yes/map-project)
+Spring Rest API + myBatis + AngularJS + Bootstrap Theme + Google Map API
+
 
 ## 개발(실행)환경
 JAVA 8  
